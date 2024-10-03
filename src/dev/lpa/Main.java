@@ -20,7 +20,7 @@ class StudentId {
     return id;
   }
 
-  public int getNextId() {
+  public synchronized int getNextId() {
     return ++id; // operation not atomic
   }
 }
@@ -45,7 +45,7 @@ public class Main {
     };
 
     var executor = Executors.newCachedThreadPool();
-      for (int i = 0; i < 10; i++) {
+      for (int i = 0; i < 100; i++) {
         studentSet.clear();
         try {
           // returns when tasks completed
